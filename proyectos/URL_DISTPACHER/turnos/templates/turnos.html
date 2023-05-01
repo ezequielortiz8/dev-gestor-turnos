@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Turno</title>
+    <link rel="stylesheet" href="H:\entvirt\curso\proy1\dev-gestor-turnos\proyectos\URL_DISTPACHER\turnos\static\turnostyle.css">
+</head>
+
+<body>
+    <main>
+    <div class="vista_paciente">
+        <div class="usuario">
+            <h3>{{ username }}</h3> <!--PACIENTE - esto deberia cambiar segun el log in-->
+            <h4>DNI: {{ dni }}</h4>     <!--esto deberia cambiar segun el log in-->
+        </div>
+        <div class="especialidad">
+            <h6>Selecciona la especialidad médica:</h6>
+            <div class="lista"> 
+                <div class="dropdown">
+                <button class="dropbtn">especialidad médica</button>
+                <div class="dropdown-content">
+                    {% for especialidad in especialidad %}
+                        <a href="#">{{ especialidad.nombre }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="fechas">
+            <h6>Selecciona una fecha del calendario:</h6>
+            <div class="calendario">
+                {% extends 'base.html' %}
+
+                {% block content %}
+                  <h2>Appointments for {{ especialidad }}</h2>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for appointment in appointments %}
+                        <tr>
+                          <td>{{ appointment.date }}</td>
+                          <td>{{ appointment.time }}</td>
+                        </tr>
+                      {% empty %}
+                        <tr>
+                          <td colspan="2">No appointments available.</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% endblock %}
+                
+            </div>
+        </div>
+        <div class="confirmar">
+        <button class="button" type="submit">CONFIRMAR</button></div>
+    </div>
+</main>
+</body>
+</html>
