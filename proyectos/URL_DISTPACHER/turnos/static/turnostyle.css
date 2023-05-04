@@ -4,9 +4,30 @@
     padding: 0;
     box-sizing: border-box;}
 
-main{
-    padding: 20px;
-    margin: 30px;
+.turnosh1{
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: left;
+}
+
+h1 {
+    font-size: 36px;
+    margin-top: 30px;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 20px;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 500;
+}
+
+.buscador{
+    margin: 10px;
     align-items: center;
     object-position: center;
     display: flex;
@@ -17,12 +38,12 @@ main{
     width: fit-content;
     height: auto;
     display: flex;
-    flex-direction: column;
     padding: 30px;
+    flex-direction: column;
     border-style: solid;
     border-color: #a1cdfd;
     border-width: 5px;
-    margin: 80px 20px;
+    margin-bottom: 20px;
     font-family: 'Anuphan', sans-serif;
 }
 
@@ -59,7 +80,6 @@ h4 {
 .lista{
     width: 20vw;
     height: 5vh;
-    background-color: #007bff;
     margin: 5px;
     align-items: center;
     justify-content: center;
@@ -94,7 +114,7 @@ h4 {
     flex-direction: column;
     width: 20vw;
     height: auto;
-    background-color: azure;
+    background-color: rgb(255, 255, 255);
     border: gray;
     border-style: solid;
     border-width: 1px;
@@ -102,9 +122,6 @@ h4 {
     justify-content: center;
     font-family: 'Anuphan', sans-serif;
     text-align: left;
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: capitalize;
     padding: 5px;
 }
 
@@ -115,10 +132,11 @@ h4 {
     justify-content: center;
     font-family: 'Anuphan', sans-serif;
     text-align: left;
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: capitalize;
-    padding: 2px;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 1px;
+    color: #6286ad;
 }
 .dropdown-content a:hover{
     background-color: #a1cdfd;
