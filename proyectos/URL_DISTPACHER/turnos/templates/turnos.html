@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendar Turno</title>
-    <link rel="stylesheet" href="H:\entvirt\curso\proy1\dev-gestor-turnos\proyectos\URL_DISTPACHER\turnos\static\turnostyle.css">
-</head>
-
-<body>
-    <main>
+{% extends 'base.html'%}
+    {% block contenido %}
+    <section class="buscador"> 
+      <div class="turnosh1"><h1>Turnos</h1>  </div>   
     <div class="vista_paciente">
         <div class="usuario">
-            <h3>{{ username }}</h3> <!--PACIENTE - esto deberia cambiar segun el log in-->
+            <h3>PACIENTE {{ username }}</h3> <!--PACIENTE - esto deberia cambiar segun el log in-->
             <h4>DNI: {{ dni }}</h4>     <!--esto deberia cambiar segun el log in-->
         </div>
         <div class="especialidad">
@@ -21,8 +13,8 @@
                 <div class="dropdown">
                 <button class="dropbtn">especialidad médica</button>
                 <div class="dropdown-content">
-                    {% for especialidad in especialidad %}
-                        <a href="#">{{ especialidad.nombre }}</a>
+                    {% for pepe in especialidades %}
+                        <a href="#">{{ pepe }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -31,37 +23,62 @@
         <div class="fechas">
             <h6>Selecciona una fecha del calendario:</h6>
             <div class="calendario">
-                {% extends 'base.html' %}
-
+              
                 {% block content %}
-                  <h2>Appointments for {{ especialidad }}</h2>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for appointment in appointments %}
-                        <tr>
-                          <td>{{ appointment.date }}</td>
-                          <td>{{ appointment.time }}</td>
-                        </tr>
-                      {% empty %}
-                        <tr>
-                          <td colspan="2">No appointments available.</td>
-                        </tr>
+                <h2>Appointment Calendar</h2>
+                <form method="get">
+                  <div class="form-group">
+                    <label for="especialidades">Medical Field:</label>
+                    <select id="especialidad" name="especialidad" class="form-control">
+                      <option value="">All Fields</option>
+                      {% for field in especialidad %}
+                        <option value="{{ especialidad }}">{{ field }}</option>
                       {% endfor %}
-                    </tbody>
-                  </table>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" class="form-control" value="{{ date }}">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
+                <br>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>especialidad</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Patient Name</th>
+                      <th>Patient Email</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for appointment in appointments %}
+                      <tr>
+                        <td>{{ appointment.especialidad }}</td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        
+                        <td>
+                          <a href="{% url 'update_appointment' appointment.id %}" class="btn btn-sm btn-primary">Edit</a>
+                          <a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                      </tr>
+                    {% empty %}
+                      <tr>
+                        <td colspan="6">No appointments available.</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
                 {% endblock %}
                 
             </div>
         </div>
         <div class="confirmar">
-        <button class="button" type="submit">CONFIRMAR</button></div>
+        <button class="button" type="submit" formaction="#">CONFIRMAR</button></div>
     </div>
-</main>
-</body>
-</html>
+</section>
+{% endblock %}
