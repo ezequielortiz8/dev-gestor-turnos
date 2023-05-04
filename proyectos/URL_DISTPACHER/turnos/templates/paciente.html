@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/dev-gestor-turnos/proyectos/URL_DISTPACHER/turnos/static/styleLQ.css">
-    <title>{{paciente}}</title>
-</head>
+{% extends 'base.html' %} {% block contenido %}
 
 <body>
     <h1>Ficha del Paciente</h1>
@@ -15,7 +6,7 @@
         <div class="cubicOne">
             <form method="get">
                 <div class="form-group">
-                    <label for="nombre">Nombre: {{nombre}}</label>
+                    <label for="nombre">Nombre: {{context.nombre}}</label>
                 </div>
                 <div class="form-group">
                     <label for="apellido">Apellido: {{apellido}}</label>
@@ -24,13 +15,17 @@
                     <label for="dni">D.N.I.: {{dni}}</label>
                 </div>
                 <div class="form-group">
-                    <label for="fechanac">Fecha de Nacimiento: {{fecha_de_nacimiento}}</label>
+                    <label for="fechanac"
+                        >Fecha de Nacimiento: {{fecha_de_nacimiento}}</label
+                    >
                 </div>
                 <div class="form-group">
                     <label for="obrasocial">Obra Social: {{obra_social}}</label>
                 </div>
                 <div class="form-group">
-                    <label for="telefono">Teléfono de contacto: {{telefono}}</label>
+                    <label for="telefono"
+                        >Teléfono de contacto: {{telefono}}</label
+                    >
                 </div>
                 <div class="form-group">
                     <label for="email">Correo electrónico: {{email}}</label>
@@ -40,17 +35,17 @@
                 </div>
             </form>
         </div>
-        
+
         <div class="cubicOne">
             <h1>Búsqueda</h1>
-            <form action="{% url 'registro_usuario' %}" method="post">
+            <form action="" method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre del doctor:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="nombre" name="nombre" required />
                 </div>
                 <div class="form-group">
                     <label for="apellido">Especialidad:</label>
-                    <input type="text" id="apellido" name="apellido" required>
+                    <input type="text" id="apellido" name="apellido" required />
                 </div>
                 <div class="form-group">
                     <button type="button" onclick="filtrado()">Buscar</button>
@@ -76,4 +71,4 @@
     </div>
 </body>
 
-</html>
+{% endblock %}
