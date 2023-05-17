@@ -14,11 +14,11 @@ urlpatterns = [
     path("turnospordni/<int:dni>", views.turnospordni),
     path("registro/", views.registro, name="registro"),
     #  path('turnos/', views.turnos, name="turnos"),
-    path(
-        "especialidad/", views.turnos, name="especialidad"
-    ),  # para la lista desplegable
+    # para la lista desplegable
+    path("especialidad/", views.turnos, name="especialidad"),
     #   path('appointments/<str:especialidad>/', appointment_calendar, name='appointment_calendar'),
     # --------------------------------------------------------------------
-    path("paciente/<str:nombre>", views.paciente, name="paciente")
+    path("paciente/<str:nombre>", views.paciente, name="paciente"),
+    path("contacto/", views.contacto, name="contacto")
     # --------------------------------------------------------------------
 ]
