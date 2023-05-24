@@ -2,6 +2,8 @@ import re
 from django import forms
 from django.forms import ValidationError
 
+from turnos.models import Especialidad
+
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value):
@@ -63,3 +65,16 @@ class ContactoForm(forms.Form):
         if suscripcion and asunto and "suscripcion" not in asunto:
             msg = "Debe agregar la palabra 'suscripcion' al asunto."
             self.add_error('asunto', msg)
+
+
+class EspecialidadForm(forms.ModelForm):
+    # nombre = forms.CharField(error_messages={'required':'Hello! no te olvide de mi!'})
+
+    class Meta:
+        model = Especialidad
+        # fields='__all__'
+        fields = ['nombre']
+        # exclude=('baja',)
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un nombre de especialidad'})
+        }

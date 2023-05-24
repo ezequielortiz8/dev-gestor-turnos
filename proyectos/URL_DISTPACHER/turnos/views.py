@@ -1,8 +1,10 @@
 from datetime import datetime
+from msilib.schema import ListView
+from urllib import request
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -10,6 +12,7 @@ from turnos.forms import ContactoForm   #Formulario de Clase Contacto
 # from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
 from .models import Especialidad  # para la lista desplegable
 from .models import Appointment
+from .forms import EspecialidadForm
 
 # Create your views here.
 
@@ -121,6 +124,48 @@ def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
     }
 
     return render(request, "turnos.html", {"especialidades": especialidades})
+
+def especialidades_index(request):
+    # queryset
+     especialidades = Especialidad.objects.all
+     return render(request, 'especialidad/index.html', {'especialidades': especialidades})
+
+
+def especialidad_nuevo(request):
+        if (request.method == 'POST'):
+            formulario = EspecialidadForm(request.POST)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect('abm')
+        else:
+            formulario = EspecialidadForm()
+        return render(request, 'especialidad/nuevo.html', {'form': formulario})
+
+
+def especialidad_editar(request, id_especialidad):
+        try:
+            especialidad = Especialidad.objects.get(pk=id_especialidad)
+        except Especialidad.DoesNotExist:
+             return render(request, 'index.html')
+
+        if (request.method == 'POST'):
+            formulario = EspecialidadForm(request.POST, instance=especialidad)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect('abm')
+        else:
+            formulario = EspecialidadForm(instance=especialidad)
+        return render(request, 'especialidad/editar.html', {'form': formulario})
+
+
+def especialidad_eliminar(request, id_especialidad):
+        try:
+            especialidad = Especialidad.objects.get(pk=id_especialidad)
+        except especialidad.DoesNotExist:
+            return render(request, 'index.html')
+        especialidad.delete()
+        return redirect('abm')
+
 
 
 # def appointment_calendar(request, especialidad): #esto e para el calendar
