@@ -8,11 +8,15 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
-from turnos.forms import ContactoForm   #Formulario de Clase Contacto
+from turnos.forms import ContactoForm  # Formulario de Clase Contacto
 # from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
+import psycopg2
 from .models import Especialidad  # para la lista desplegable
 from .models import Appointment
 from .forms import EspecialidadForm
+from decouple import config
+
+
 
 # Create your views here.
 
@@ -91,6 +95,8 @@ def contacto(request):
     return render(request, 'contacto.html', context)
 
 # --------------------------------------------------------------------
+
+
 def paciente(request, nombre):
     context = {"nombre": nombre}
     return render(request, "paciente.html", {"context": context})
@@ -114,58 +120,77 @@ def paciente(request, nombre):
 
 
 def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
-    especialidades = {
-        "cardiologia": "Cardiología",
-        "dermatologia": "Dermatología",
-        "endocrinologia": "Endocrinología",
-        "gastroenterologia": "Gastroenterología",
-        "neurologia": "Neurología",
-        "oncologia": "Oncología",
-    }
+    # especialidades = {
+    #     "cardiologia": "Cardiología",
+    #     "dermatologia": "Dermatología",
+    #     "endocrinologia": "Endocrinología",
+    #     "gastroenterologia": "Gastroenterología",
+    #     "neurologia": "Neurología",
+    #     "oncologia": "Oncología",
+    # }
 
+    # Establecer conexión a la base de datos
+    conn = psycopg2.connect(host=config('DATABASE_HOST'), port=config('DATABASE_PORT'),
+                            dbname=config('DATABASE_NAME'), user=config('DATABASE_USER'), password=config('DATABASE_PASSWORD'))
+
+    # Crear un cursor para ejecutar consultas
+    cursor = conn.cursor()
+
+    # Ejecutar la consulta SQL
+    cursor.execute("SELECT nombre FROM public.turnos_especialidad")
+
+    # Obtener los resultados de la consulta
+    results = cursor.fetchall()
+    especialidades = [result[0] for result in results]
+
+    # Cerrar el cursor y la conexión a la base de datos
+    cursor.close()
+    conn.close()
+
+    # Renderizar la vista con el contexto
     return render(request, "turnos.html", {"especialidades": especialidades})
+
 
 def especialidades_index(request):
     # queryset
-     especialidades = Especialidad.objects.all
-     return render(request, 'especialidad/index.html', {'especialidades': especialidades})
+    especialidades = Especialidad.objects.all
+    return render(request, 'especialidad/index.html', {'especialidades': especialidades})
 
 
 def especialidad_nuevo(request):
-        if (request.method == 'POST'):
-            formulario = EspecialidadForm(request.POST)
-            if formulario.is_valid():
-                formulario.save()
-                return redirect('abm')
-        else:
-            formulario = EspecialidadForm()
-        return render(request, 'especialidad/nuevo.html', {'form': formulario})
+    if (request.method == 'POST'):
+        formulario = EspecialidadForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('abm')
+    else:
+        formulario = EspecialidadForm()
+    return render(request, 'especialidad/nuevo.html', {'form': formulario})
 
 
 def especialidad_editar(request, id_especialidad):
-        try:
-            especialidad = Especialidad.objects.get(pk=id_especialidad)
-        except Especialidad.DoesNotExist:
-             return render(request, 'index.html')
+    try:
+        especialidad = Especialidad.objects.get(pk=id_especialidad)
+    except Especialidad.DoesNotExist:
+        return render(request, 'index.html')
 
-        if (request.method == 'POST'):
-            formulario = EspecialidadForm(request.POST, instance=especialidad)
-            if formulario.is_valid():
-                formulario.save()
-                return redirect('abm')
-        else:
-            formulario = EspecialidadForm(instance=especialidad)
-        return render(request, 'especialidad/editar.html', {'form': formulario})
+    if (request.method == 'POST'):
+        formulario = EspecialidadForm(request.POST, instance=especialidad)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('abm')
+    else:
+        formulario = EspecialidadForm(instance=especialidad)
+    return render(request, 'especialidad/editar.html', {'form': formulario})
 
 
 def especialidad_eliminar(request, id_especialidad):
-        try:
-            especialidad = Especialidad.objects.get(pk=id_especialidad)
-        except especialidad.DoesNotExist:
-            return render(request, 'index.html')
-        especialidad.delete()
-        return redirect('abm')
-
+    try:
+        especialidad = Especialidad.objects.get(pk=id_especialidad)
+    except especialidad.DoesNotExist:
+        return render(request, 'index.html')
+    especialidad.delete()
+    return redirect('abm')
 
 
 # def appointment_calendar(request, especialidad): #esto e para el calendar
