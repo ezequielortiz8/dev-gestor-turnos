@@ -16,15 +16,21 @@ urlpatterns = [
     #  path('turnos/', views.turnos, name="turnos"),
     # para la lista desplegable
     path("especialidad/", views.turnos, name="especialidad"),
-      
     #   path('appointments/<str:especialidad>/', appointment_calendar, name='appointment_calendar'),
     # --------------------------------------------------------------------
     path("paciente/<str:nombre>", views.paciente, name="paciente"),
     path("contacto/", views.contacto, name="contacto"),
-    path('abm/', views.especialidades_index , name="abm"),
-    path('especialidad/nuevo/', views.especialidad_nuevo, name='especialidad_nuevo'),
-    path('especialidad/editar/<int:id_especialidad>', views.especialidad_editar, name='especialidad_editar'),
-    path('especialidad/eliminar/<int:id_especialidad>', views.especialidad_eliminar, name='especialidad_eliminar'),
-
+    path("abm/", views.especialidades_index, name="abm"),
+    path("especialidad/nuevo/", views.especialidad_nuevo, name="especialidad_nuevo"),
+    path(
+        "especialidad/editar/<int:id_especialidad>",
+        views.especialidad_editar,
+        name="especialidad_editar",
+    ),
+    path(
+        "especialidad/eliminar/<int:id_especialidad>",
+        views.especialidad_eliminar,
+        name="especialidad_eliminar",
+    ),
     # --------------------------------------------------------------------
 ]

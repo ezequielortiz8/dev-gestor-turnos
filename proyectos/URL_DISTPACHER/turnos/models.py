@@ -1,5 +1,15 @@
 from django.db import models
 
+#Brasil
+from datetime import date
+from django.db import models
+from django.conf import settings
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+from django.db.models.fields.related import ForeignKey
+#Brasil
+
+
 # Create your models here.
 
 class Especialidad(models.Model): #para la lista desplegable
@@ -45,18 +55,3 @@ class Turno(models.Model):
         Reprogramado = 'rep', 'Reprogramado'
 
     estado = models.CharField(max_length=3, choices=Estado.choices, default=Estado.Pendiente)
-
-
-
-
-
-    
-
-    
-
-
-    
-
-
-
-

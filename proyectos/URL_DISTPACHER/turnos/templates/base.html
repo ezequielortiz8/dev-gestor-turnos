@@ -1,101 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/turnostyle.css">
-    <link rel="stylesheet" href="/static/reg_usuario_style.css">
-    <link rel="stylesheet" href="/static/estilo_inicio.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="/static/turnostyle.css" />
+        <link rel="stylesheet" href="/static/reg_usuario_style.css" />
+        <link rel="stylesheet" href="/static/estilo_inicio.css" />
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous"
+        />
+        <title>Turnos</title>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <nav
+                    class="navbar navbar-expand-lg navbar-light bg-light"
+                    style="background-color: #0597ff"
+                >
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="">Gestion de Turnos</a>
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav"
+                            aria-controls="navbarNav"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link active"
+                                        aria-current="page"
+                                        href="{% url 'inicio' %}"
+                                        >Inicio</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        href="{% url 'registro'%}"
+                                        >Registro</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        href="{% url 'especialidad' %}"
+                                        >Especialidades</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'abm' %}"
+                                        >ABM</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        href="{% url 'ingreso' %}"
+                                        >Ingreso</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        href="{% url 'paciente' 'nombre' %}"
+                                        >Simulación</a
+                                    >
+                                </li>
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link"
+                                        href="{% url 'contacto' %}"
+                                        >Contáctenos</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main>{% block contenido %} {% endblock contenido %}</main>
+        <footer style="background-color: #deded5">
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <h5
+                            class="mb-3"
+                            style="letter-spacing: 2px; color: #818963"
+                        >
+                            footer
+                        </h5>
+                        <p>
+                            En GT disponemos de personal calificado de acuerdo a
+                            la especialidad que necesites. Muchas personas
+                            forman parte de nuestra familia, regístrate y podrás
+                            solicitar turnos con nuestros especialistas que con
+                            gusto te atenderemos.
+                        </p>
+                    </div>
 
-    <title>Turnos</title>
-</head>
-<body>
-    <header>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #0597ff;">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="">Gestion de Turnos</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'registro'%}">Registro</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'especialidad' %}">Especialidades</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'abm' %}">ABM</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'ingreso' %}">Ingreso</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'paciente' 'nombre' %}">Simulación</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contacto' %}">Contáctenos</a>
-                  </li>
-                </ul>
-              </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5
+                            class="mb-3"
+                            style="letter-spacing: 2px; color: #818963"
+                        >
+                            links
+                        </h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-1">
+                                <a href="#!" style="color: #4f4f4f"
+                                    >Preguntas frecuentes</a
+                                >
+                            </li>
+                            <li class="mb-1">
+                                <a href="#!" style="color: #4f4f4f">Precios</a>
+                            </li>
+                            <li class="mb-1">
+                                <a href="#!" style="color: #4f4f4f"
+                                    >Sobre nosotros</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5
+                            class="mb-1"
+                            style="letter-spacing: 2px; color: #818963"
+                        >
+                            Horarios
+                        </h5>
+                        <table
+                            class="table"
+                            style="color: #4f4f4f; border-color: #666"
+                        >
+                            <tbody>
+                                <tr>
+                                    <td>Lunes a viernes:</td>
+                                    <td>8:00 - 21:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Sabados</td>
+                                    <td>8:00 - 13:00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </nav>
-    </div>
-    </header>
-    <main>
-        {% block contenido %}
-        {% endblock contenido %}
-    </main>
-    <footer style="background-color: #deded5;">
-        <div class="container p-4">
-          <div class="row">
-            <div class="col-lg-6 col-md-12 mb-4">
-              <h5 class="mb-3" style="letter-spacing: 2px; color: #818963;">footer</h5>
-              <p>
-                En GT disponemos de personal calificado de acuerdo a la especialidad que necesites. Muchas personas forman parte de nuestra familia, regístrate y podrás solicitar turnos con nuestros especialistas que con gusto te atenderemos.            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-              <h5 class="mb-3" style="letter-spacing: 2px; color: #818963;">links</h5>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1">
-                  <a href="#!" style="color: #4f4f4f;">Preguntas frecuentes</a>
-                </li>
-                <li class="mb-1">
-                  <a href="#!" style="color: #4f4f4f;">Precios</a>
-                </li>
-                <li class="mb-1">
-                  <a href="#!" style="color: #4f4f4f;">Sobre nosotros</a>
-                </li>
-              </ul>
+            <div
+                class="text-center p-3"
+                style="background-color: rgba(0, 0, 0, 0.2)"
+            >
+                Gestion de turnos - 2023
             </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-              <h5 class="mb-1" style="letter-spacing: 2px; color: #818963;">Horarios</h5>
-              <table class="table" style="color: #4f4f4f; border-color: #666;">
-                <tbody>
-                  <tr>
-                    <td>Lunes a viernes:</td>
-                    <td>8:00 - 21:00</td>
-                  </tr>
-                  <tr>
-                    <td>Sabados</td>
-                    <td>8:00 - 13:00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          Gestion de turnos - 2023
-        </div>
-     
-      </footer>
-</body>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    </body>
 </html>

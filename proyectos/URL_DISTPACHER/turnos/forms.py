@@ -7,54 +7,57 @@ from turnos.models import Especialidad
 
 def solo_caracteres(value):
     if any(char.isdigit() for char in value):
-        raise ValidationError('El nombre no puede contener números. %(valor)s',
-                              code='Invalid',
-                              params={'valor': value})
+        raise ValidationError(
+            "El nombre no puede contener números. %(valor)s",
+            code="Invalid",
+            params={"valor": value},
+        )
 
 
 def custom_validate_email(value):
-    email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    email_regex = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     if not re.match(email_regex, value):
-        raise ValidationError('Correo electrónico inválido')
+        raise ValidationError("Correo electrónico inválido")
 
 
 class ContactoForm(forms.Form):
     nombre = forms.CharField(
-        label='Nombre',
+        label="Nombre",
         max_length=50,
         validators=(solo_caracteres,),
         widget=forms.TextInput(
-            attrs={'class': 'form-control',
-                   'placeholder': 'Solo letras'}
-        )
+            attrs={"class": "form-control", "placeholder": "Solo letras"}
+        ),
     )
     email = forms.EmailField(
-        label='Email',
+        label="Email",
         max_length=100,
-        error_messages={
-            'required': 'Por favor completa el campo'
-        },
+        error_messages={"required": "Por favor completa el campo"},
         widget=forms.EmailInput(
-            attrs={'class': 'form-control', 'type': 'email', 'placeholder': 'ejemplo@dominio'})
+            attrs={
+                "class": "form-control",
+                "type": "email",
+                "placeholder": "ejemplo@dominio",
+            }
+        )
         # widget=forms.TextInput(
         #     attrs={'class': 'form-control', 'type': 'email'})
     )
     asunto = forms.CharField(
-        label='Asunto',
+        label="Asunto",
         max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={"class": "form-control"}),
     )
     mensaje = forms.CharField(
-        label='Mensaje',
+        label="Mensaje",
         max_length=500,
-        widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control'})
+        widget=forms.Textarea(attrs={"rows": 5, "class": "form-control"}),
     )
 
     def clean_mensaje(self):
-        data = self.cleaned_data['mensaje']
+        data = self.cleaned_data["mensaje"]
         if len(data) < 20:
-            raise ValidationError(
-                "Debes especificar mejor el mensaje que nos envias")
+            raise ValidationError("Debes especificar mejor el mensaje que nos envias")
         return data
 
     def clean(self):
@@ -64,7 +67,7 @@ class ContactoForm(forms.Form):
 
         if suscripcion and asunto and "suscripcion" not in asunto:
             msg = "Debe agregar la palabra 'suscripcion' al asunto."
-            self.add_error('asunto', msg)
+            self.add_error("asunto", msg)
 
 
 class EspecialidadForm(forms.ModelForm):
@@ -73,8 +76,13 @@ class EspecialidadForm(forms.ModelForm):
     class Meta:
         model = Especialidad
         # fields='__all__'
-        fields = ['nombre']
+        fields = ["nombre"]
         # exclude=('baja',)
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un nombre de especialidad'})
+            "nombre": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Ingrese un nombre de especialidad",
+                }
+            )
         }

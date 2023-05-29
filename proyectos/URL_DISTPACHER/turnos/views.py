@@ -9,13 +9,13 @@ from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from turnos.forms import ContactoForm  # Formulario de Clase Contacto
+
 # from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
 import psycopg2
 from .models import Especialidad  # para la lista desplegable
 from .models import Appointment
 from .forms import EspecialidadForm
 from decouple import config
-
 
 
 # Create your views here.
@@ -64,35 +64,40 @@ def contact(request):  # este aun no se ha usado
 def contacto(request):
     # return HttpResponse("Formulario de contacto")
     mensaje = None
-    if request.method == 'POST':
+    if request.method == "POST":
         mi_formulario = ContactoForm(request.POST)
         # mensaje ='Hemos recibido tus datos'
         # acción para tomar los datos del formulario
         if mi_formulario.is_valid():
-            messages.success(request, 'Hemos recibido tus datos')
+            messages.success(request, "Hemos recibido tus datos")
             mensaje = f"De: {mi_formulario.cleaned_data['nombre']} <{mi_formulario.cleaned_data['email']}>\n Asunto: {mi_formulario.cleaned_data['asunto']}\n Mensaje: {mi_formulario.cleaned_data['mensaje']}"
             mensaje_html = f"""
                 <p>De: {mi_formulario.cleaned_data['nombre']} <a href="mailto:{mi_formulario.cleaned_data['email']}">{mi_formulario.cleaned_data['email']}</a></p>
                 <p>Asunto:  {mi_formulario.cleaned_data['asunto']}</p>
                 <p>Mensaje: {mi_formulario.cleaned_data['mensaje']}</p>
             """
-            asunto = "CONSULTA DESDE LA PAGINA - " + \
-                mi_formulario.cleaned_data['asunto']
-            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [
-                      settings.RECIPIENT_ADDRESS], fail_silently=False, html_message=mensaje_html)
+            asunto = (
+                "CONSULTA DESDE LA PAGINA - " + mi_formulario.cleaned_data["asunto"]
+            )
+            send_mail(
+                asunto,
+                mensaje,
+                settings.EMAIL_HOST_USER,
+                [settings.RECIPIENT_ADDRESS],
+                fail_silently=False,
+                html_message=mensaje_html,
+            )
         # acción para tomar los datos del formulario
         else:
-            messages.error(
-                request, 'Por favor revisa los errores en el formulario')
-    elif request.method == 'GET':
+            messages.error(request, "Por favor revisa los errores en el formulario")
+    elif request.method == "GET":
         mi_formulario = ContactoForm()
     else:
         return HttpResponseNotAllowed(f"Método {request.method} no soportado")
 
-    context = {
-        'contacto_formulario': mi_formulario
-    }
-    return render(request, 'contacto.html', context)
+    context = {"contacto_formulario": mi_formulario}
+    return render(request, "contacto.html", context)
+
 
 # --------------------------------------------------------------------
 
@@ -130,8 +135,13 @@ def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
     # }
 
     # Establecer conexión a la base de datos
-    conn = psycopg2.connect(host=config('DATABASE_HOST'), port=config('DATABASE_PORT'),
-                            dbname=config('DATABASE_NAME'), user=config('DATABASE_USER'), password=config('DATABASE_PASSWORD'))
+    conn = psycopg2.connect(
+        host=config("DATABASE_HOST"),
+        port=config("DATABASE_PORT"),
+        dbname=config("DATABASE_NAME"),
+        user=config("DATABASE_USER"),
+        password=config("DATABASE_PASSWORD"),
+    )
 
     # Crear un cursor para ejecutar consultas
     cursor = conn.cursor()
@@ -154,43 +164,45 @@ def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
 def especialidades_index(request):
     # queryset
     especialidades = Especialidad.objects.all
-    return render(request, 'especialidad/index.html', {'especialidades': especialidades})
+    return render(
+        request, "especialidad/index.html", {"especialidades": especialidades}
+    )
 
 
 def especialidad_nuevo(request):
-    if (request.method == 'POST'):
+    if request.method == "POST":
         formulario = EspecialidadForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return redirect('abm')
+            return redirect("abm")
     else:
         formulario = EspecialidadForm()
-    return render(request, 'especialidad/nuevo.html', {'form': formulario})
+    return render(request, "especialidad/nuevo.html", {"form": formulario})
 
 
 def especialidad_editar(request, id_especialidad):
     try:
         especialidad = Especialidad.objects.get(pk=id_especialidad)
     except Especialidad.DoesNotExist:
-        return render(request, 'index.html')
+        return render(request, "index.html")
 
-    if (request.method == 'POST'):
+    if request.method == "POST":
         formulario = EspecialidadForm(request.POST, instance=especialidad)
         if formulario.is_valid():
             formulario.save()
-            return redirect('abm')
+            return redirect("abm")
     else:
         formulario = EspecialidadForm(instance=especialidad)
-    return render(request, 'especialidad/editar.html', {'form': formulario})
+    return render(request, "especialidad/editar.html", {"form": formulario})
 
 
 def especialidad_eliminar(request, id_especialidad):
     try:
         especialidad = Especialidad.objects.get(pk=id_especialidad)
     except especialidad.DoesNotExist:
-        return render(request, 'index.html')
+        return render(request, "index.html")
     especialidad.delete()
-    return redirect('abm')
+    return redirect("abm")
 
 
 # def appointment_calendar(request, especialidad): #esto e para el calendar
