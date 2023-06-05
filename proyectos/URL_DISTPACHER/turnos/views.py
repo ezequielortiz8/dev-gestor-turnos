@@ -1,21 +1,22 @@
+from django.shortcuts import redirect, render
 from datetime import datetime
 from msilib.schema import ListView
-from urllib import request
+#from urllib import request
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_mail
-from django.shortcuts import redirect, render
+from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
-from turnos.forms import ContactoForm  # Formulario de Clase Contacto
-# from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
+from decouple import config
 import psycopg2
+from .forms import ContactoForm  # Formulario de Clase Contacto
+# from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
 from .models import Especialidad  # para la lista desplegable
+from .models import Persona
+from .models import Medico
 from .models import Appointment
 from .forms import EspecialidadForm
-from decouple import config
-
 
 
 # Create your views here.
@@ -66,7 +67,6 @@ def contacto(request):
     mensaje = None
     if request.method == 'POST':
         mi_formulario = ContactoForm(request.POST)
-        # mensaje ='Hemos recibido tus datos'
         # acción para tomar los datos del formulario
         if mi_formulario.is_valid():
             messages.success(request, 'Hemos recibido tus datos')
@@ -119,36 +119,28 @@ def paciente(request, nombre):
 #     return render(request, 'turnos.html', {'especialidad': especialidad})
 
 
-def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
-    # especialidades = {
-    #     "cardiologia": "Cardiología",
-    #     "dermatologia": "Dermatología",
-    #     "endocrinologia": "Endocrinología",
-    #     "gastroenterologia": "Gastroenterología",
-    #     "neurologia": "Neurología",
-    #     "oncologia": "Oncología",
-    # }
+def turnos(request):
 
-    # Establecer conexión a la base de datos
-    conn = psycopg2.connect(host=config('DATABASE_HOST'), port=config('DATABASE_PORT'),
-                            dbname=config('DATABASE_NAME'), user=config('DATABASE_USER'), password=config('DATABASE_PASSWORD'))
+    especialidades = Especialidad.objects.all()
+    return render(request, 'turnos.html', {"especialidades": especialidades})
 
-    # Crear un cursor para ejecutar consultas
-    cursor = conn.cursor()
 
-    # Ejecutar la consulta SQL
-    cursor.execute("SELECT nombre FROM public.turnos_especialidad")
+def medicos(request):
 
-    # Obtener los resultados de la consulta
-    results = cursor.fetchall()
-    especialidades = [result[0] for result in results]
+    # medicos = Medico.objects.all()
+    # return render(request, 'turnos.html', {"medico": medicos})
 
-    # Cerrar el cursor y la conexión a la base de datos
-    cursor.close()
-    conn.close()
+    #medic = Persona.objects.filter(persona_ptr_id__id__especialidad='Cardiologia')
+    lista_medicos = Persona.objects.all().select_related('Cardiologia').values_list('id', 'persona_ptr_id__id').exists()
+    for i in lista_medicos:
+        print(i.nombre)
+    return render(request, 'turnos.html', {"medico": lista_medicos})
 
-    # Renderizar la vista con el contexto
-    return render(request, "turnos.html", {"especialidades": especialidades})
+
+def persona(request):
+
+    personas = Persona.objects.all()
+    return render(request, 'turnos.html', {"persona": personas})
 
 
 def especialidades_index(request):
