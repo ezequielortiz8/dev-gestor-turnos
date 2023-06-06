@@ -150,7 +150,7 @@ def persona(request):
     personas = Persona.objects.all()
     return render(request, 'turnos.html', {"persona": personas})
 
-
+@login_required
 def especialidades_index(request):
     # queryset
     especialidades = Especialidad.objects.all
