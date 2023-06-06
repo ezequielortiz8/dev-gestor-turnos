@@ -3,7 +3,7 @@ from msilib.schema import ListView
 from urllib import request
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.template import loader
