@@ -5,6 +5,7 @@ from msilib.schema import ListView
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -17,6 +18,10 @@ from .models import Persona
 from .models import Medico
 from .models import Appointment
 from .forms import EspecialidadForm
+from decouple import config
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 
 
 # Create your views here.
@@ -31,8 +36,11 @@ def index(request):
 
 
 def ingreso(request):
-    return render(request, "login.html", {})
+    return render(request, "registration/login.html", {})
 
+def exit(request):
+    logout(request)
+    return redirect('index')
 
 def registro(request):
     return render(request, "reg_usuario.html")
