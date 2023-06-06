@@ -155,7 +155,7 @@ def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
     # Renderizar la vista con el contexto
     return render(request, "turnos.html", {"especialidades": especialidades})
 
-
+@login_required
 def especialidades_index(request):
     # queryset
     especialidades = Especialidad.objects.all
