@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -52,5 +53,9 @@ class Estado(models.TextChoices):
     Cumplido = 'cum', 'Cumplido'
     Reprogramado = 'rep', 'Reprogramado'
 
-    estado = models.CharField(
+estado = models.CharField(
         max_length=3, choices=Estado.choices, default=Estado.Pendiente)
+
+class Usuario(AbstractUser):
+    pass
+

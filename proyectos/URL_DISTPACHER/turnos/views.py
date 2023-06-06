@@ -4,7 +4,7 @@ from urllib import request
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -15,6 +15,8 @@ from .models import Especialidad  # para la lista desplegable
 from .models import Appointment
 from .forms import EspecialidadForm
 from decouple import config
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 
@@ -30,8 +32,11 @@ def index(request):
 
 
 def ingreso(request):
-    return render(request, "login.html", {})
+    return render(request, "registration/login.html", {})
 
+def exit(request):
+    logout(request)
+    return redirect('index')
 
 def registro(request):
     return render(request, "reg_usuario.html")

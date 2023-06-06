@@ -8,6 +8,7 @@ urlpatterns = [
     path("", views.index, name="inicio"),
     #  path('misturnos/', views.misturnos, name="misturnos"),
     path("ingreso/", views.ingreso, name="ingreso"),
+    path('logout/', views.exit, name='exit'),
     path("turnostodos/", views.turnostodos),
     path("turnosporespecialidad/", views.turnosporespecialidad),
     path("turnosporprofesional/", views.turnosporprofesional),
@@ -26,5 +27,6 @@ urlpatterns = [
     path('especialidad/editar/<int:id_especialidad>', views.especialidad_editar, name='especialidad_editar'),
     path('especialidad/eliminar/<int:id_especialidad>', views.especialidad_eliminar, name='especialidad_eliminar'),
 
+    path('accounts/login/', views.ingreso, name="login"),
     # --------------------------------------------------------------------
 ]
