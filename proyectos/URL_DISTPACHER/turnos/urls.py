@@ -27,6 +27,6 @@ urlpatterns = [
     path('especialidad/editar/<int:id_especialidad>', views.especialidad_editar, name='especialidad_editar'),
     path('especialidad/eliminar/<int:id_especialidad>', views.especialidad_eliminar, name='especialidad_eliminar'),
 
-    path('accounts/login/', views.ingreso, name="login"),
+   # path('accounts/login/', views.ingreso, name="login"),
     # --------------------------------------------------------------------
 ]
