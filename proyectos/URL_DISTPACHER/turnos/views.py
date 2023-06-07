@@ -36,11 +36,11 @@ def index(request):
 
 
 def ingreso(request):
-    return render(request, "registration/login.html", {})
+    return render(request, "registration/login.html")
 
 def exit(request):
     logout(request)
-    return redirect('index')
+    return redirect('inicio')
 
 def registro(request):
     return render(request, "reg_usuario.html")
