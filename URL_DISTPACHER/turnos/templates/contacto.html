@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<main>
+<div class="contact_form">
+  <!-- formulario de contacto en html y css -->
+  <div class="formulario">
+ 
+    <h2>Formulario de Contacto</h2>
+    <p>Escríbanos y en breve nos pondremos en contacto con usted.</p>
+    <form id="contact-form" name="contact-form" action="{% url 'contacto' %}" method="POST">
+      {% csrf_token %}
+      
+      {{ contacto_formulario.as_table }}
+      <div class="row">
+        {% for campo in contacto_formu %}
+        
+        <div class="col-md-12">
+          <div class="md-form mb-0">
+            <label for="name" class="form-label">{{ campo.label }}</label>
+            {{campo}}
+            {% comment %} {% if campo.field.widget.input_type == 'checkbox' %}
+            {{campo}}
+            <label for="name" class="">{{ campo.label }}</label>
+            {% else %}
+            <label for="name" class="">{{ campo.label }}</label>
+            {{campo}}
+            {% endif %} {% endcomment %}
+          </div>
+          <div>{{campo.errors}}</div>
+        </div>
+        
+        {% endfor %}
+      </div>
+      <div class="text-center text-md-left mt-3">
+        <button class="button" type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
+</main>
+{% endblock %}

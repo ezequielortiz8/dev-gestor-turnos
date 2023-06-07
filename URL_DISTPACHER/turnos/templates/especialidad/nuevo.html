@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% comment %} {% block titulo %}Nueva categoria{% endblock%} {% endcomment %}
+
+{% block contenido %}
+{% comment %} <h2 class="mt-4">Categorias cursos</h2> {% endcomment %}
+<ol class="breadcrumb mb-4">
+    {% comment %} <li class="breadcrumb-item"><a href="{% url 'inicio_administracion' %}">Administracion</a></li> {% endcomment %}
+    <li class="breadcrumb-item active">Nueva especialidad</li>
+</ol>
+
+
+<div class="card">
+    <div class="card-header">Creacion especialidad</div>
+    <div class="card-body">
+        <form action="{% url 'especialidad_nuevo' %}" method="post" novalidate>
+            {% csrf_token %}
+            {% include 'especialidad/form.html' %}
+        </form>
+    </div>
+</div>
+{% endblock %}
