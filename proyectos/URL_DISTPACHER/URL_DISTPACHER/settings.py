@@ -134,3 +134,4 @@ LOGIN_REDIRECT_URL = reverse_lazy('home')
 
 AUTH_USER_MODEL = 'turnos.Usuario'
 LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = "inicio"

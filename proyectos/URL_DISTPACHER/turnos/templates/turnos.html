@@ -31,8 +31,8 @@
             <div class="dropdown">
               <button class="dropbtn">Médico o especialista</button>
               <div class="dropdown-content">
-                {% for medico in lista_medicos %}
-                <a href="#">{{ medico.nombre }}</a>
+                {% for medico in medicos %}
+                <a href="#">{{ medico }}</a>
                 {% endfor %}
               </div>
             </div>

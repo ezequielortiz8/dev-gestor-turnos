@@ -34,9 +34,9 @@ def index(request):
 # def turnos(request):
 #     return render(request, "turnos.html")
 
-
+@login_required
 def ingreso(request):
-    return render(request, "registration/login.html")
+    return render(request, "index.html")
 
 def exit(request):
     logout(request)
@@ -130,19 +130,8 @@ def paciente(request, nombre):
 def turnos(request):
 
     especialidades = Especialidad.objects.all()
-    return render(request, 'turnos.html', {"especialidades": especialidades})
-
-
-def medicos(request):
-
-    # medicos = Medico.objects.all()
-    # return render(request, 'turnos.html', {"medico": medicos})
-
-    #medic = Persona.objects.filter(persona_ptr_id__id__especialidad='Cardiologia')
-    lista_medicos = Persona.objects.all().select_related('Cardiologia').values_list('id', 'persona_ptr_id__id').exists()
-    for i in lista_medicos:
-        print(i.nombre)
-    return render(request, 'turnos.html', {"medico": lista_medicos})
+    med = Medico.objects.all()
+    return render(request, 'turnos.html', {"especialidades": especialidades, "medicos": med})
 
 
 def persona(request):
