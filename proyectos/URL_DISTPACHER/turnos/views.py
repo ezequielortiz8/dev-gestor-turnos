@@ -1,11 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
+from django.shortcuts import redirect
 from datetime import datetime
 from msilib.schema import ListView
 #from urllib import request
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
-from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -18,10 +18,8 @@ from .models import Persona
 from .models import Medico
 from .models import Appointment
 from .forms import EspecialidadForm
-from decouple import config
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
 
 
 # Create your views here.
@@ -33,6 +31,7 @@ def index(request):
 
 # def turnos(request):
 #     return render(request, "turnos.html")
+
 
 @login_required
 def ingreso(request):
@@ -71,38 +70,19 @@ def contact(request):  # este aun no se ha usado
 
 
 def contacto(request):
-    # return HttpResponse("Formulario de contacto")
-    mensaje = None
-    if request.method == 'POST':
-        mi_formulario = ContactoForm(request.POST)
-        # acción para tomar los datos del formulario
-        if mi_formulario.is_valid():
-            messages.success(request, 'Hemos recibido tus datos')
-            mensaje = f"De: {mi_formulario.cleaned_data['nombre']} <{mi_formulario.cleaned_data['email']}>\n Asunto: {mi_formulario.cleaned_data['asunto']}\n Mensaje: {mi_formulario.cleaned_data['mensaje']}"
-            mensaje_html = f"""
-                <p>De: {mi_formulario.cleaned_data['nombre']} <a href="mailto:{mi_formulario.cleaned_data['email']}">{mi_formulario.cleaned_data['email']}</a></p>
-                <p>Asunto:  {mi_formulario.cleaned_data['asunto']}</p>
-                <p>Mensaje: {mi_formulario.cleaned_data['mensaje']}</p>
-            """
-            asunto = "CONSULTA DESDE LA PAGINA - " + \
-                mi_formulario.cleaned_data['asunto']
-            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [
-                      settings.RECIPIENT_ADDRESS], fail_silently=False, html_message=mensaje_html)
-        # acción para tomar los datos del formulario
-        else:
-            messages.error(
-                request, 'Por favor revisa los errores en el formulario')
-    elif request.method == 'GET':
-        mi_formulario = ContactoForm()
-    else:
-        return HttpResponseNotAllowed(f"Método {request.method} no soportado")
-
-    context = {
-        'contacto_formulario': mi_formulario
+    data = {
+        'contacto_formulario': ContactoForm()
     }
-    return render(request, 'contacto.html', context)
 
-# --------------------------------------------------------------------
+    if request.method == 'POST':
+        formulario = ContactoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Contacto guardado"
+        else:
+            data['contacto_formulario'] = formulario
+
+    return render(request,'contacto.html', data)
 
 
 def paciente(request, nombre):
@@ -132,6 +112,13 @@ def turnos(request):
     especialidades = Especialidad.objects.all()
     med = Medico.objects.all()
     return render(request, 'turnos.html', {"especialidades": especialidades, "medicos": med})
+
+    
+
+def medicos(request):
+
+    med = Medico.objects.all()
+    return render(request, 'turnos.html', {"medicos": med})
 
 
 def persona(request):
