@@ -125,14 +125,6 @@ def paciente(request, nombre):
 
 
 def turnos(request):  # ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
-    # especialidades = {
-    #     "cardiologia": "Cardiología",
-    #     "dermatologia": "Dermatología",
-    #     "endocrinologia": "Endocrinología",
-    #     "gastroenterologia": "Gastroenterología",
-    #     "neurologia": "Neurología",
-    #     "oncologia": "Oncología",
-    # }
 
     # Establecer conexión a la base de datos
     conn = psycopg2.connect(
@@ -203,6 +195,17 @@ def especialidad_eliminar(request, id_especialidad):
         return render(request, "index.html")
     especialidad.delete()
     return redirect("abm")
+
+def medicos(request):
+
+    # medicos = Medico.objects.all()
+    # return render(request, 'turnos.html', {"medico": medicos})
+
+    result = Persona.objects.filter(medico__persona_ptr_id=Persona.id) \
+                .filter(medico__persona_ptr_id=Especialidad.id) \
+                .filter(Especialidad__nombre='Cardiologia') \
+                .values('nombre')
+    return render(request, 'turnos.html', {"medico": result})
 
 
 # def appointment_calendar(request, especialidad): #esto e para el calendar
