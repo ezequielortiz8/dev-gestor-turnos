@@ -31,7 +31,7 @@ class Persona(models.Model):
     clave = models.CharField(max_length=30, verbose_name='Clave')
 
     def __str__(self):
-        return self.nombre + ', ' + self.apellido
+        return self.nombre + ' ' + self.apellido
 
 
 class Medico(Persona):
@@ -40,6 +40,16 @@ class Medico(Persona):
 
 class Paciente(Persona):
     obrasocial = models.CharField(max_length=100, verbose_name='obrasocial')
+
+
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=50, verbose_name='Nombre')
+    email = models.EmailField(max_length=100, verbose_name='Email')
+    asunto = models.CharField(max_length=100, verbose_name='Asunto')
+    mensaje = models.TextField(max_length=300, verbose_name='Mensaje')
+
+    def __str__(self):
+        return self.nombre
 
 
 class Turno(models.Model):
@@ -56,8 +66,10 @@ class Estado(models.TextChoices):
     Cumplido = 'cum', 'Cumplido'
     Reprogramado = 'rep', 'Reprogramado'
 
+
 estado = models.CharField(
-        max_length=3, choices=Estado.choices, default=Estado.Pendiente)
+    max_length=3, choices=Estado.choices, default=Estado.Pendiente)
+
 
 class Usuario(AbstractUser):
     pass
