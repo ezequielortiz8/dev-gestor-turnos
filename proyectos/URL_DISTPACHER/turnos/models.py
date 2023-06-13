@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-
 class Especialidad(models.Model):  # para la lista desplegable
     nombre = models.CharField(max_length=50, verbose_name='Nombre')
 
@@ -61,4 +60,5 @@ estado = models.CharField(
 
 class Usuario(AbstractUser):
     pass
+
 

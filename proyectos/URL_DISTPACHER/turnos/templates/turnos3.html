@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+    {% block contenido %}
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 my-4 mx-auto">
+                    <select id="cboEspecialidad" class="form-control text-center"></select>
+                    <br /><br />
+                    <select id="cboMedico" class="form-control text-center"></select>
+                    <br /><br />
+                    <h4 id="txtAlcalde" class="text-center"></h4>
+                </div>
+            </div>
+        </div>
+        {% load static %}
+        <script src="{% static 'js/index.js' %}"></script>
+    </body>
+    {% endblock %}

@@ -17,10 +17,10 @@ from .models import Especialidad  # para la lista desplegable
 from .models import Persona
 from .models import Medico
 from .models import Appointment
-from .forms import EspecialidadForm
 from decouple import config
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.http import JsonResponse
 
 
 
@@ -34,9 +34,9 @@ def index(request):
 # def turnos(request):
 #     return render(request, "turnos.html")
 
-@login_required
+
 def ingreso(request):
-    return render(request, "index.html")
+    return render(request, "registration/login.html")
 
 def exit(request):
     logout(request)
@@ -181,8 +181,65 @@ def especialidad_eliminar(request, id_especialidad):
     especialidad.delete()
     return redirect('abm')
 
+def turnos2(request):
+    if request.method == "POST":
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data["especialidad"])
+            print(form.cleaned_data["medico"])
+        else:
+            print(form.errors)
+    else:
+        form = LocationForm()
+    return render(request, 'turnos2.html', {"form": form})
 
-# def appointment_calendar(request, especialidad): #esto e para el calendar
-#     appointments = Appointment.objects.filter(especialidad=especialidad)
-#     context = {'appointments': appointments}
-#     return render(request, 'turnos.html', context)
+def carga_medicos(request):
+    especialidad_id = request.GET.get("especialidad")
+    medicos = Medico.objects.filter(especialidad_id=especialidad_id)
+    return render(request, "medico_opciones.html", {"medicos": medicos})
+
+def turnos3(request):
+    return render(request, 'turnos3.html')
+
+def get_paises(_request):
+    paises = list(Pais.objects.values())
+
+    if (len(paises) > 0):
+        data = {'message': "Success", 'paises': paises}
+    else:
+        data = {'message': "Not Found"}
+
+    return JsonResponse(data)
+
+
+def get_ciudades(_request, pais_id):
+    ciudades = list(Ciudad.objects.filter(pais_id=pais_id).values())
+
+    if (len(ciudades) > 0):
+        data = {'message': "Success", 'ciudades': ciudades}
+    else:
+        data = {'message': "Not Found"}
+
+    return JsonResponse(data)
+
+def get_especialidades(_request):
+    especialidades = list(Especialidad.objects.values())
+
+    if (len(especialidades) > 0):
+        data = {'message': "Success", 'especialidades': especialidades}
+    else:
+        data = {'message': "Not Found"}
+
+    return JsonResponse(data)
+
+def get_medicos(_request, especialidad_id):
+    medicos = list(Medico.objects.filter(especialidad_id=especialidad_id).values())
+
+    if (len(medicos) > 0):
+        data = {'message': "Success", 'medicos': medicos}
+    else:
+        data = {'message': "Not Found"}
+
+    return JsonResponse(data)
+
+

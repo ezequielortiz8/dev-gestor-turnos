@@ -1,44 +1,24 @@
 {% extends 'base.html'%}
     {% block contenido %}
-    <section class="buscador">
-    
-      <div class="vista_paciente">
-        <div class="usuario">
-            <h3>{{ username }}</h3> <!--PACIENTE - esto deberia cambiar segun el log in-->
-            <h4>DNI: {{ dni }}</h4>     <!--esto deberia cambiar segun el log in-->
-        </div>
 
-        {% comment %} Comienzo de especialidad {% endcomment %}
-        <div class="especialidad">
-          <h6>Selecciona la especialidad:</h6>
-          <div class="lista"> 
-            <div class="dropdown">
-              <button class="dropbtn">especialidad médica</button>
-              <div class="dropdown-content">
-                {% for especialidad in especialidades %}
-                <a href="#">{{ especialidad }}</a>
-                {% endfor %}
+
+      <div class="container">
+          <div class="row">
+              <div class="col-md-4 my-4 mx-auto">
+                  <h6>Selecciona la especialidad:</h6>
+                  <select id="cboEspecialidad" class="form-control text-center"></select>
+                  <br /><br />
+                  <h6>Selecciona el médico<h6>
+                  <select id="cboMedico" class="form-control text-center"></select>
+                  <br /><br />
+                  <h4 id="txtAlcalde" class="text-center"></h4>
               </div>
-            </div>
           </div>
-        </div>
-        {% comment %} Fin de especialidad {% endcomment %}
+      </div>
+      {% load static %}
+      <script src="{% static 'js/index.js' %}"></script>
+
         
-        {% comment %} Comienzo de Médico {% endcomment %}
-        <div class="medico">
-          <h6>Selecciona el médico<h6>
-          <div class="lista"> 
-            <div class="dropdown">
-              <button class="dropbtn">Médico o especialista</button>
-              <div class="dropdown-content">
-                {% for medico in medicos %}
-                <a href="#">{{ medico }}</a>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-        {% comment %} Fin de Médico {% endcomment %}
         
         {% comment %} Comienzo de día {% endcomment %}
         {% comment %} Comienzo de día {% endcomment %}
@@ -79,7 +59,7 @@
         {% comment %} Fin de horario {% endcomment %}
         
         <div class="confirmar">
-        <button class="button" type="submit">CONFIRMAR</button></div>
-    </div>
-</section>
+          <button class="button" type="submit">CONFIRMAR</button>
+        </div>
+
 {% endblock %}
