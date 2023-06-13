@@ -11,7 +11,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from decouple import config
 import psycopg2
-from .forms import ContactoForm  # Formulario de Clase Contacto
+from .forms import ContactoForm, EspecialidadForm  # Formulario de Clase Contacto
 # from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
 from .models import Especialidad  # para la lista desplegable
 from .models import Persona
@@ -181,18 +181,6 @@ def especialidad_eliminar(request, id_especialidad):
     especialidad.delete()
     return redirect('abm')
 
-def turnos2(request):
-    if request.method == "POST":
-        form = LocationForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data["especialidad"])
-            print(form.cleaned_data["medico"])
-        else:
-            print(form.errors)
-    else:
-        form = LocationForm()
-    return render(request, 'turnos2.html', {"form": form})
-
 def carga_medicos(request):
     especialidad_id = request.GET.get("especialidad")
     medicos = Medico.objects.filter(especialidad_id=especialidad_id)
@@ -200,27 +188,6 @@ def carga_medicos(request):
 
 def turnos3(request):
     return render(request, 'turnos3.html')
-
-def get_paises(_request):
-    paises = list(Pais.objects.values())
-
-    if (len(paises) > 0):
-        data = {'message': "Success", 'paises': paises}
-    else:
-        data = {'message': "Not Found"}
-
-    return JsonResponse(data)
-
-
-def get_ciudades(_request, pais_id):
-    ciudades = list(Ciudad.objects.filter(pais_id=pais_id).values())
-
-    if (len(ciudades) > 0):
-        data = {'message': "Success", 'ciudades': ciudades}
-    else:
-        data = {'message': "Not Found"}
-
-    return JsonResponse(data)
 
 def get_especialidades(_request):
     especialidades = list(Especialidad.objects.values())

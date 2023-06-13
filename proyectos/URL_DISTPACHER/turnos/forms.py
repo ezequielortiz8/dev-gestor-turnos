@@ -67,3 +67,14 @@ class ContactoForm(forms.Form):
             self.add_error('asunto', msg)
 
 
+class EspecialidadForm(forms.ModelForm):
+    
+
+    class Meta:
+        model = Especialidad
+        # fields='__all__'
+        fields = ['nombre']
+       
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un nombre de especialidad'})
+        }
