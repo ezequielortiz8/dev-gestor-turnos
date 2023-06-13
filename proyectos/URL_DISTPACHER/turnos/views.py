@@ -168,6 +168,27 @@ def especialidad_eliminar(request, id_especialidad):
     especialidad.delete()
     return redirect('abm')
 
+def get_especialidades(_request):
+    especialidades = list(Especialidad.objects.values())
+
+    if (len(especialidades) > 0):
+        data = {'message': "Success", 'especialidades': especialidades}
+    else:
+        data = {'message': "Not Found"}
+
+    return JsonResponse(data)
+
+def get_medicos(_request, especialidad_id):
+    medicos = list(Medico.objects.filter(especialidad_id=especialidad_id).values())
+
+    if (len(medicos) > 0):
+        data = {'message': "Success", 'medicos': medicos}
+    else:
+        data = {'message': "Not Found"}
+
+    return JsonResponse(data)
+
+
 
 # def appointment_calendar(request, especialidad): #esto e para el calendar
 #     appointments = Appointment.objects.filter(especialidad=especialidad)

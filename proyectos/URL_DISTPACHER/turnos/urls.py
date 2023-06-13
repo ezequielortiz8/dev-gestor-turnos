@@ -26,6 +26,8 @@ urlpatterns = [
     path('especialidad/nuevo/', views.especialidad_nuevo, name='especialidad_nuevo'),
     path('especialidad/editar/<int:id_especialidad>', views.especialidad_editar, name='especialidad_editar'),
     path('especialidad/eliminar/<int:id_especialidad>', views.especialidad_eliminar, name='especialidad_eliminar'),
+    path('especialidad/especialidades/', views.get_especialidades, name='get_especialidades'),
+    path('especialidad/medicos/<int:especialidad_id>', views.get_medicos, name='get_medicos'),
 
     # --------------------------------------------------------------------
 ]
