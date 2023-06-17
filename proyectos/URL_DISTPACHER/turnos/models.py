@@ -35,7 +35,7 @@ class Persona(models.Model):
 
 
 class Medico(Persona):
-    especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
+    especialidad = models.ManyToManyField(Especialidad, related_name='especialidades')
 
 
 class Paciente(Persona):

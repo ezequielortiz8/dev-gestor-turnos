@@ -9,7 +9,7 @@ const listarMedicos = async (idEspecialidad) => {
             medicos = data.medicos;
             let opciones = ``;
             medicos.forEach((medico) => {
-                opciones += `<option value='${medico.id}'>${medico.nombre+', '+medico.apellido }</option>`;
+                opciones += `<option value='${medico.id}'>${medico.nombre+' '+medico.apellido }</option>`;
             });
             cboMedico.innerHTML = opciones;
          } else {

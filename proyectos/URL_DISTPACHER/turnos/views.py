@@ -20,6 +20,7 @@ from .models import Appointment
 from .forms import EspecialidadForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.views.generic import ListView
 
 
 # Create your views here.
@@ -179,7 +180,7 @@ def get_especialidades(_request):
     return JsonResponse(data)
 
 def get_medicos(_request, especialidad_id):
-    medicos = list(Medico.objects.filter(especialidad_id=especialidad_id).values())
+    medicos = list(Medico.objects.filter(especialidad=especialidad_id).values())
 
     if (len(medicos) > 0):
         data = {'message': "Success", 'medicos': medicos}
@@ -189,8 +190,9 @@ def get_medicos(_request, especialidad_id):
     return JsonResponse(data)
 
 
-
-# def appointment_calendar(request, especialidad): #esto e para el calendar
-#     appointments = Appointment.objects.filter(especialidad=especialidad)
-#     context = {'appointments': appointments}
-#     return render(request, 'turnos.html', context)
+class MedicoListView(ListView):
+    model = Medico
+    context_object_name = 'medicos'
+    template_name = 'medico/index.html'
+    queryset = Medico.objects.all
+  #  ordering = ['nombre']

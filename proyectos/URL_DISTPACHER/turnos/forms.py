@@ -22,18 +22,14 @@ class ContactoForm(forms.ModelForm):
 
     class Meta:
         model = Contacto
-        #fields = ["nombre", "email", "asunto", "mensaje"]
         fields = '__all__'
 
 
 class EspecialidadForm(forms.ModelForm):
-    # nombre = forms.CharField(error_messages={'required':'Hello! no te olvide de mi!'})
-
     class Meta:
         model = Especialidad
         # fields='__all__'
         fields = ['nombre']
-        # exclude=('baja',)
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un nombre de especialidad'})
         }

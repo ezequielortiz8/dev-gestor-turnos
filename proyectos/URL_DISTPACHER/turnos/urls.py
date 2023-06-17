@@ -29,5 +29,7 @@ urlpatterns = [
     path('especialidad/especialidades/', views.get_especialidades, name='get_especialidades'),
     path('especialidad/medicos/<int:especialidad_id>', views.get_medicos, name='get_medicos'),
 
+    path('medicosview/', views.MedicoListView.as_view(), name='medicos_index_view'),
+
     # --------------------------------------------------------------------
 ]

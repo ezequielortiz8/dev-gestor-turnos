@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Staff medico{% endblock%}
+
+{% block contenido %}
+<h1 class="mt-4">Staff médico</h1>
+
+
+
+<br>
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Especialidad</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medico in medicos %}
+                    
+                    <tr>
+                        <td> {% for especialidad in medico.especialidad.all %} {{ especialidad }}
+                              {% if not forloop.last %}, {% endif %}
+                             {% endfor %}
+                        </td>
+                        <td>{{medico.nombre}}</td>
+                        <td>{{medico.apellido}}</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+    
