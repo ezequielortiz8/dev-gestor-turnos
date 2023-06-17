@@ -1,0 +1,30 @@
+form {
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/*label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 400;
+}*/
+
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"]{
+    width: 100%;
+    padding: 0;
+    margin: 2px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Anuphan', sans-serif;
+}
+
+
