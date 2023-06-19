@@ -33,6 +33,7 @@ urlpatterns = [
     path('turno/nuevoturno', views.TurnosCreate.as_view(), name='nuevo_turno' ),
     path('turno/turnosview', views.TurnosListView.as_view(), name='turnos_index_view' ),
     path('turno/editar/<int:pk>', views.TunosUpdateView.as_view(), name='turno_editar'),
+    path('turno/eliminar/<int:pk>', views.TunosDeleteView.as_view(), name='turno_eliminar'),
 
     # --------------------------------------------------------------------
 ]

@@ -20,7 +20,7 @@ from .models import Appointment
 from .forms import EspecialidadForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -166,6 +166,7 @@ def especialidad_eliminar(request, id_especialidad):
         especialidad = Especialidad.objects.get(pk=id_especialidad)
     except especialidad.DoesNotExist:
         return render(request, 'index.html')
+    messages.success(request, 'Se ha eliminado el curso correctamente')
     especialidad.delete()
     return redirect('abm')
 
@@ -214,6 +215,11 @@ class TunosUpdateView(UpdateView):
     model = Turno
     form_class=TurnoForm 
     template_name = 'turno/editar.html'
+    success_url = reverse_lazy('turnos_index_view')
+
+class TunosDeleteView(DeleteView):
+    model = Turno
+    template_name = 'turno/eliminar.html'
     success_url = reverse_lazy('turnos_index_view')
 
 

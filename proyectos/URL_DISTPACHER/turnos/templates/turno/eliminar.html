@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="card">
+    <div class="card-header">Eliminacion de turno</div>
+    <div class="card-body">
+        <form method="post">{% csrf_token %}
+            <p>Esta seguro que quiere eliminar el turno"{{ turno.fecha }}, {{ turno.especialidad }}, {{ turno.paciente }}"?</p>
+            <input type="submit" value="Confirmar" class="btn btn-danger">
+            <button class="btn btn-secondary" onclick="javascript:window.history.go(-1);">Cancelar</button>   
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

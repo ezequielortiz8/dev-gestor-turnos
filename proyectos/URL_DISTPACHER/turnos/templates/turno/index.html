@@ -25,8 +25,8 @@
                         <td>{{turno.paciente}}</td>
                         <td>{{turno.fecha}}</td>
                         <td>
-                            <a href="{% url 'turno_editar' turno.id %}" title="Editar" class="btn btn-warning"><i class='bx bx-pencil'></i></a> 
-                            <a href="{% url 'especialidad_eliminar' turno.id %}" title="Eliminar" class="btn btn-danger"><i class='bx bx-trash'></i> </a> 
+                            {% comment %} <a href="{% url 'turno_editar' turno.id %}" title="Editar" class="btn btn-warning"><i class='bx bx-pencil'></i></a> 
+                            <a href="{% url 'turno_eliminar' turno.id %}" title="Eliminar" class="btn btn-danger"><i class='bx bx-trash'></i> </a>  {% endcomment %}
                         </td>
                     </tr>
                 {% endfor %}
