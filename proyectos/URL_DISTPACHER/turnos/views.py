@@ -21,7 +21,12 @@ from .forms import EspecialidadForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.forms import UserCreationForm  # para registro nuevo
+from django.contrib.auth.models import User  # para registro nuevo
+from .models import Usuario # para registro nuevo
+from django.http import HttpResponse  # para registro nuevo
+from django.contrib.auth import login  # para registro nuevo
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -223,4 +228,26 @@ class TunosDeleteView(DeleteView):
     success_url = reverse_lazy('turnos_index_view')
 
 
+#REGISTRO
+def registration_form(request):
+    if request.method == 'GET':
+        return render(request, 'registration.html', {
+            'form': UserCreationForm
+        })
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = Usuario.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+                user.save()
+                login(request, user)
+                return redirect('inicio')
 
+            except IntegrityError:
+                return render(request, 'registration.html', {
+                    'form': UserCreationForm,
+                    "error": 'El usuario ya existe'
+        })
+        return render(request, 'registration.html', {
+            'form': UserCreationForm,
+            "error": 'Las contraseñas no coinciden'
+        })

@@ -1,13 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100;200;300;400;500;600;700&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;}
-
-
 .buscador{
-    padding: 20px;
-    margin: 30px;
+    height: fit-content;
     align-items: center;
     object-position: center;
     display: flex;
@@ -21,9 +13,8 @@
     flex-direction: column;
     padding: 30px;
     border-style: solid;
-    border-color: #a1cdfd;
+    border-color: #818963;
     border-width: 5px;
-    margin: 80px 20px;
     font-family: 'Anuphan', sans-serif;
 }
 
@@ -34,17 +25,11 @@
     font-weight: bolder;
 }
 
-h3 {
-    text-align: left;
-    font-size: 28px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-h4 {
-    text-align: left;
-    font-size: 20px;
-    font-weight: 400;
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .especialidad{
@@ -56,12 +41,18 @@ h4 {
     align-items: center;
     justify-content: center;
 }
-
+.medico{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+}
 .lista{
     width: 20vw;
     height: 5vh;
-    background-color: #007bff;
-    margin: 5px;
+    margin: 4px;
     align-items: center;
     justify-content: center;
 }
@@ -95,7 +86,8 @@ h4 {
     flex-direction: column;
     width: 20vw;
     height: auto;
-    background-color: azure;
+    background-color: rgb(247, 255, 240);
+    color: antiquewhite;
     border: gray;
     border-style: solid;
     border-width: 1px;
@@ -107,22 +99,32 @@ h4 {
     font-weight: 600;
     text-transform: capitalize;
     padding: 5px;
+    text-decoration: none;
+    list-style: none;
 }
 
+.a{
+    text-decoration: none;
+    list-style: none;
+}
 .dropdown-content a{
     display: flex;
     flex-direction: column;
+    color: rgb(63, 63, 63);
     align-items: left;
     justify-content: center;
     font-family: 'Anuphan', sans-serif;
     text-align: left;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: capitalize;
     padding: 2px;
+    text-decoration: none;
+    list-style: none;
 }
 .dropdown-content a:hover{
-    background-color: #a1cdfd;
+    background-color: #818963;
+    color: antiquewhite;
 }
 
 .fechas{
@@ -140,15 +142,8 @@ h4 {
     height: 40vh;
     align-items: center;
     justify-content: center;
-    background-color: #007bff;
+    background-color: #818963;
     margin: 5px;
-}
-
-h6 {
-    text-align: left;
-    font-size: 15px;
-    font-family: 'Anuphan', sans-serif;
-    font-weight: 400;
 }
 
 table {
@@ -168,20 +163,9 @@ table {
   
 
 .confirmar{
-    width: 100%;
+    width: 500px;
     display: flex;
     align-items: right;
-    justify-content: right;
+    justify-content: center;
 }
 
-.button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    font-size: 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'Anuphan', sans-serif;
-    font-weight: 400;
-}

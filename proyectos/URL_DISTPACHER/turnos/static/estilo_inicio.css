@@ -1,10 +1,56 @@
 .fondo {
-    background-image: url(note.jpg);
-    height: 65vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url(images/note.jpg);
+    height: 70vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-li {
-    font-size: 18px;
+
+.title{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-weight: bolder;
+    text-transform: capitalize;
 }
+
+.img-inicio ul li {
+    list-style: none;
+    text-decoration: none;
+}
+
+.img-inicio ul li a{
+    list-style: none;
+    text-decoration: none;
+    text-decoration-color: red;
+}
+.img-inicio h4{
+    list-style: none;
+    text-decoration: none;
+    color: rgb(252, 247, 241);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration-color: red;
+}
+
+.pagination ul li {
+    font-size: 1.5vw;
+    text-decoration: none;
+}
+
+.pagination ul li a{
+    text-decoration: none;
+    color: rgb(241, 10, 10);
+    font-family: 'Anuphan', sans-serif;
+}
+.pagination ul li a:hover{
+    color: rgb(162, 194, 152);
+}
+
+::-webkit-scrollbar {
+    display: hidden;
+}
+

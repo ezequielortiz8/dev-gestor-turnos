@@ -74,3 +74,6 @@ estado = models.CharField(
 class Usuario(AbstractUser):
     pass
 
+class Registration(models.Model): #nuevo
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
