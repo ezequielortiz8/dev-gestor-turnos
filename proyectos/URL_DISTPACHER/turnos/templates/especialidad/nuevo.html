@@ -3,20 +3,24 @@
 {% comment %} {% block titulo %}Nueva categoria{% endblock%} {% endcomment %}
 
 {% block contenido %}
-{% comment %} <h1 class="mt-4">Categorias cursos</h1> {% endcomment %}
+<main>
+{% comment %}
+ <h2>Especialidades</h2> {% endcomment %}
 <ol class="breadcrumb mb-4">
-    {% comment %} <li class="breadcrumb-item"><a href="{% url 'inicio_administracion' %}">Administracion</a></li> {% endcomment %}
-    <li class="breadcrumb-item active">Nueva especialidad</li>
+    {% comment %}
+    <li class="breadcrumb-item"><a href="{% url 'inicio_administracion' %}">Administracion</a></li> {% endcomment %}
+    <li class="breadcrumb-item active"><h2>Nueva especialidad</h2></li>
 </ol>
 
 
-<div class="card">
-    <div class="card-header">Creacion especialidad</div>
+<div class="form">
+    <div class="card-header"><h3>Creacion especialidad</h3></div>
     <div class="card-body">
-        <form action="{% url 'especialidad_nuevo' %}" method="post" novalidate>
+        <form class='form' action="{% url 'especialidad_nuevo' %}" method="post" novalidate>
             {% csrf_token %}
             {% include 'especialidad/form.html' %}
         </form>
     </div>
 </div>
+</main>
 {% endblock %}

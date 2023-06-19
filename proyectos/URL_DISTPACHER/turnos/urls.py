@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import registration_form
 
 # from .views import Especialidad
 # from .views import appointment_calendar
@@ -13,7 +14,7 @@ urlpatterns = [
     path("turnosporespecialidad/", views.turnosporespecialidad),
     path("turnosporprofesional/", views.turnosporprofesional),
     path("turnospordni/<int:dni>", views.turnospordni),
-    path("registro/", views.registro, name="registro"),
+    path('register/', views.registration_form, name='registration_form'),
     #  path('turnos/', views.turnos, name="turnos"),
     # para la lista desplegable
     path("especialidad/", views.turnos, name="especialidad"),

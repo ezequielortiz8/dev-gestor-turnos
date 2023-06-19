@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block contenido %}
 
-<body>
-    <h1>Ficha del Paciente</h1>
+<main>
+    <h2>Ficha del Paciente</h2>
     <div class="cubicMaster">
         <div class="cubicOne">
             <form method="get">
@@ -31,14 +31,14 @@
                     <label for="email">Correo electrónico: {{email}}</label>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Salir</button>
+                    <button class='button'type="submit">Salir</button>
                 </div>
             </form>
         </div>
 
         <div class="cubicOne">
-            <h1>Búsqueda</h1>
-            <form action="" method="post">
+            <h2>Búsqueda</h2>
+            <form class='form' action="" method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre del doctor:</label>
                     <input type="text" id="nombre" name="nombre" required />
@@ -48,15 +48,15 @@
                     <input type="text" id="apellido" name="apellido" required />
                 </div>
                 <div class="form-group">
-                    <button type="button" onclick="filtrado()">Buscar</button>
+                    <button class='button' type="button" onclick="filtrado()">Buscar</button>
                 </div>
             </form>
         </div>
-    </div>
+
     <div class="cubicFind">
-        <h1>Resultados</h1>
+        <h2>Resultados</h2>
         {% for medico in busqueda %}
-        <form action="{% url 'registro_usuario' %}" method="post">
+        <form class='form' action="{% url 'registro_usuario' %}" method="post">
             <div class="form-group">
                 <label for="nombre">Nombre del doctor: {{nombre_del_doctor}}</label>
             </div>
@@ -64,11 +64,12 @@
                 <label for="apellido">Especialidad: {{especialidad}}</label>
             </div>
             <div class="form-group">
-                <button type="submit">Buscar turno</button>
+                <button class='button' type="submit">Buscar turno</button>
             </div>
         </form>
         {% endfor %}
     </div>
-</body>
+</div>
+</main>
 
 {% endblock %}

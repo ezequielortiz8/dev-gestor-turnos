@@ -2,12 +2,11 @@
 {% block contenido %}
 
 <div class="fondo d-flex justify-content-center align-items-center">
-    <ul class="text-white" style="font-size:50">
-        <li>Ver especialidades</li>
-        <li>Obtener turno</li>
-        <li>
-          <a class="nav-link" href="{% url 'medicos_index_view' %}">Staff medico</a>
-        </li>
-      </ul>
+  <div class="title"><h1>Gestor de turnos</h1></div>
+    <ul class="img-inicio">
+      <li><a href="{% url 'abm' %}"><h4><i class='bx bx-health'></i> Ver Especialidades</h4></a></li>
+      <li><a href="{% url 'especialidad' %}"><h4><i class='bx bxs-calendar-check'></i> Obtener Turno</h4></a></li>
+      <li><a href="{% url 'medicos_index_view' %}"><h4><i class='bx bxs-briefcase'></i> Staff Médico</h4></a></li>
+    </ul>
 </div>
 {% endblock %}
