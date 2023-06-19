@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+<title>{% block titulo %}{% endblock %}</title>
+
+{% block contenido %}
+<h1 class="mt-4">Lista de turnos</h1>
+
+<br>
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Especialidad</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for turno in turnos %}
+                    
+                    <tr>
+            
+                        <td>{{turno.especialidad}}</td>
+                        <td>{{turno.paciente}}</td>
+                        <td>{{turno.fecha}}</td>
+                        <td>
+                            <a href="{% url 'turno_editar' turno.id %}" title="Editar" class="btn btn-warning"><i class='bx bx-pencil'></i></a> 
+                            <a href="{% url 'especialidad_eliminar' turno.id %}" title="Eliminar" class="btn btn-danger"><i class='bx bx-trash'></i> </a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        <a name="" id="" class="btn btn-success" href="{% url 'nuevo_turno' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a> 
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 import re
 from django import forms
 from django.forms import ValidationError
-from turnos.models import Especialidad
+from turnos.models import Especialidad, Turno
 from turnos.models import Contacto
 
 
@@ -33,3 +33,19 @@ class EspecialidadForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese un nombre de especialidad'})
         }
+
+
+class TurnoForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['fecha'].widget = forms.widgets.DateInput(
+            attrs={
+                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
+                'class': 'form-control'
+                }
+            )
+        self.fields['hora'].widget = forms.TimeInput(attrs={'type': 'time'})
+    class Meta:
+        model = Turno
+        fields = '__all__'

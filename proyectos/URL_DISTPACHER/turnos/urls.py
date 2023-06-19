@@ -30,6 +30,9 @@ urlpatterns = [
     path('especialidad/medicos/<int:especialidad_id>', views.get_medicos, name='get_medicos'),
 
     path('medicosview/', views.MedicoListView.as_view(), name='medicos_index_view'),
+    path('turno/nuevoturno', views.TurnosCreate.as_view(), name='nuevo_turno' ),
+    path('turno/turnosview', views.TurnosListView.as_view(), name='turnos_index_view' ),
+    path('turno/editar/<int:pk>', views.TunosUpdateView.as_view(), name='turno_editar'),
 
     # --------------------------------------------------------------------
 ]

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="card-header">Nuevo turno</div>
+    <!-- Security token -->
+    {% csrf_token %}
+ 
+    <!-- Using the formset -->
+    {{ form.as_p }}
+     
+    <input type="submit"  value="Guardar" class="btn btn-success">
+    <button class="btn btn-secondary" onclick="javascript:window.history.go(-1);">Cancelar</button>   
+</form>
+{% endblock %}

@@ -6,21 +6,21 @@ from msilib.schema import ListView
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.template import loader
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from decouple import config
 import psycopg2
-from .forms import ContactoForm  # Formulario de Clase Contacto
+from .forms import ContactoForm, TurnoForm  # Formulario de Clase Contacto
 # from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
 from .models import Especialidad  # para la lista desplegable
 from .models import Persona
-from .models import Medico
+from .models import Medico, Turno
 from .models import Appointment
 from .forms import EspecialidadForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView
 
 
 # Create your views here.
@@ -196,3 +196,25 @@ class MedicoListView(ListView):
     template_name = 'medico/index.html'
     queryset = Medico.objects.all
   #  ordering = ['nombre']
+
+class TurnosCreate(CreateView):
+    model = Turno
+    form_class=TurnoForm 
+    success_url = reverse_lazy('turnos_index_view')
+   # fields = ['especialidad', 'paciente', 'fecha', 'hora', 'medico']
+    template_name = 'turno/nuevoturno.html'
+
+class TurnosListView(ListView):
+    model = Turno
+    context_object_name = 'turnos'
+    template_name = 'turno/index.html'
+    queryset = Turno.objects.all
+    
+class TunosUpdateView(UpdateView):
+    model = Turno
+    form_class=TurnoForm 
+    template_name = 'turno/editar.html'
+    success_url = reverse_lazy('turnos_index_view')
+
+
+
