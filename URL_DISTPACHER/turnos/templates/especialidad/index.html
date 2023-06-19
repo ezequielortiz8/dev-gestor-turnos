@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Especialidades{% endblock%}
+
+{% block contenido %}
+<main>
+<div class="form">
+    <div class="card-header">
+        <h2>Especialidades</h2>
+    </div>
+    <div>
+        <form class='form' action="">
+            <div class="form-group">
+                <div>
+                    <div class="md-form mb-0">
+                        <label for="name" class="">Nombre</label>
+                        
+                        <input type="text" 
+                              id="nombre" 
+                              name="nombre"
+                              placeholder="Ingrese el nombre" 
+                              class="form-control">
+                    </div>
+                </div>
+                <div>
+                    <button class="button">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class="form">
+    <div class="form-group">
+        <a class="button" href="{% url 'especialidad_nuevo' %}" role="button"><i class="fa-solid fa-circle-plus"></i>Nuevo</a> 
+        <!-- bs5-table-defaul -->
+        <table class="form">
+            <thead class="form-group">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for especialidad in especialidades %}
+                    <tr>
+                        <td>{{especialidad.id}}</td>
+                        <td>{{especialidad.nombre}}</td>
+                        <td>
+                            <a href="{% url 'especialidad_editar' especialidad.id %}" title="Editar" class="button"><i class='bx bx-pencil'></i></a> 
+                            <a href="{% url 'especialidad_eliminar' especialidad.id %}" title="Eliminar" class="button"><i class='bx bx-trash'></i></a> 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% comment %} 
+        <div class="form">
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link" href="#"><<</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">>></a></li>
+                    </ul>
+                  </nav>
+            </div>
+        </div> {% endcomment %}
+    </div>
+</div>
+</main>
+{% endblock %}

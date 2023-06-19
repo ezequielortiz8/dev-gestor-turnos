@@ -1,0 +1,52 @@
+.form {
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    margin-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 500px;
+}
+option{
+    width: 500px;
+}
+
+.form ul li{
+    font-size: 16px;
+}
+
+label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 400;
+}
+
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], input[type="submit"]{
+    width: 100%;
+    margin: 2px;
+    padding: 3px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Anuphan', sans-serif;
+}
+
+
+.helptext{
+    text-transform: uppercase;
+    display: none;
+}
+
+.table form{
+    margin-top: 5%;
+}

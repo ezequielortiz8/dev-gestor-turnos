@@ -1,0 +1,206 @@
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Anuphan:wght@200;300;400;500;600;700&display=swap');
+ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    min-height: 55vh;
+    background-color: #ffffff;
+    margin-bottom: 5%;
+
+}
+
+/*scroll*/
+::-webkit-scrollbar {
+    width: 10px;
+	height: 100px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #264717ab;
+    border-radius: 0 0 40px 40px;
+}
+
+    h1 {
+        text-align: center;
+        font-size: 5vw;
+        font-family: 'Anton', sans-serif;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        color: #c5d6bd;
+    }
+
+    h2 {
+        text-align: left;
+        font-size: 2vw;
+        margin-top: 30px;
+        font-family: 'Anton', sans-serif;
+        color: #264717;
+    }
+
+    h3 {
+        text-align: left;
+        font-size: 1.7vw;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    
+    h4 {
+        text-align: left;
+        font-size: 1.5vw;
+        font-weight: 400;
+        text-decoration: none;
+        list-style: none;
+    }
+
+    h5 {
+        text-align: left;
+        font-size: 1vw;
+        font-family: 'Anuphan', sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+
+    h6 {
+        text-align: left;
+        font-size: 18px;
+        font-family: 'Anuphan', sans-serif;
+        font-weight: 400;
+    }
+
+    p{
+        text-align: left;
+        font-size: 16px;
+        font-family: 'Anuphan', sans-serif;
+        font-weight: 300;
+    }
+ 
+header{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Anuphan', sans-serif;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+.container-fluid{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar{
+    width: 100%;
+    margin: 0;
+    padding: 0 5%;
+    
+}
+.navbar-nav{
+    align-items: center;
+    justify-content: space-between;
+    align-content: right;
+}
+
+.navbar-nav ul li a{
+    color: #264717;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 400;
+}
+
+.navbar-brand a {
+    color: #264717;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 600;
+    line-height: 50%;
+    padding: 0;
+}
+
+.ul li a{
+    text-decoration: none;
+    list-style: none;
+}
+
+.a{
+    text-decoration: none;
+    list-style: none;
+}
+
+.button {
+    background-color: #818963;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    margin: 2%;
+    font-size: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Anuphan', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    
+}
+.button a{
+    text-decoration: none;
+    list-style: none;
+}
+
+.button:hover{
+    background-color: #666;
+}
+
+    /*footer*/
+
+footer{
+  display: block;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25px;
+}
+
+footer ul{
+    list-style: none;
+    text-align: left;
+}
+
+footer ul li a{
+    text-decoration: none;
+    font-size: 1.5vh;
+    line-height: 2px;
+    text-transform: uppercase;
+    color: #4f4f4f;
+}
+footer ul li a:hover{
+    color: #466e26;
+}
+
+footer h5{
+    letter-spacing: 2px;
+    color: #818963; }
+
+/*contacto*/
+.formulario p{
+    text-align: center;
+}
+.textarea{
+    padding: 1%;
+}
