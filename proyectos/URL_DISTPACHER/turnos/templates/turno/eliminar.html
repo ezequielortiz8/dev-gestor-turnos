@@ -6,7 +6,7 @@
         <form method="post">{% csrf_token %}
             <p>Esta seguro que quiere eliminar el turno"{{ turno.fecha }}, {{ turno.especialidad }}, {{ turno.paciente }}"?</p>
             <input type="submit" value="Confirmar" class="btn btn-danger">
-            <button class="btn btn-secondary" onclick="javascript:window.history.go(-1);">Cancelar</button>   
+            <a href="{% url 'tasks'%}" class="btn btn-outline">Cancel</a>  
         </form>
         
     </div>
