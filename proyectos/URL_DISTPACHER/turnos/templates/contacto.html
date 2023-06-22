@@ -12,13 +12,22 @@
     miembros de nuestro personal estará encantado de contactarlo directamente y responder sus preguntas lo antes
     posible.
     </p>
-    {% csrf_token %}
+    {% comment %} {% csrf_token %}
     {{ contacto_formulario.as_p }}
     <div class="text-center text-md-left mt-3">
       <button class="button" type="submit">Enviar</button>
     </div>
   </form>
-  {{ mensaje }}
+  {{ mensaje }} {% endcomment %}
+
+  {% block content %}
+  <h1>Contacto</h1>
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit"  value="Guardar" class="btn btn-success"> 
+  </form>
+  {% endblock %}
 </div>
 </main>
 {% endblock %}

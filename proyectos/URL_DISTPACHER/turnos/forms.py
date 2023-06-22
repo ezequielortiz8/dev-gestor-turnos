@@ -18,11 +18,17 @@ def custom_validate_email(value):
         raise ValidationError('Correo electrónico inválido')
 
 
-class ContactoForm(forms.ModelForm):
+# class ContactoForm(forms.ModelForm):
 
-    class Meta:
-        model = Contacto
-        fields = '__all__'
+#     class Meta:
+#         model = Contacto
+#         fields = '__all__'
+
+class ContactoForm(forms.Form):
+    name = forms.CharField(label='Nombre', max_length=100)
+    email = forms.EmailField(label='Email', max_length=100)
+    subject = forms.CharField(label='Asunto', max_length=100)
+    message = forms.CharField(label='Mensaje', widget=forms.Textarea(attrs={'rows': 5}))
 
 
 class EspecialidadForm(forms.ModelForm):

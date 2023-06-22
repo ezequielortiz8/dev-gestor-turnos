@@ -15,7 +15,7 @@ from .forms import ContactoForm, TurnoForm  # Formulario de Clase Contacto
 # from .models import Profile #podria ser paciente, este se necesita para visuaisar cual es el paciente que hizo el log-in
 from .models import Especialidad  # para la lista desplegable
 from .models import Persona
-from .models import Medico, Turno
+from .models import Medico, Turno, Contacto
 from .models import Appointment
 from .forms import EspecialidadForm
 from django.contrib.auth.decorators import login_required
@@ -74,21 +74,38 @@ def turnospordni(request, dni):
 def contact(request):  # este aun no se ha usado
     return HttpResponse("Formulario de registro")
 
+# def contacto(request):
+#     data = {
+#         'contacto_formulario': ContactoForm()
+#     }
+
+
+    # if request.method == 'POST':
+    #     formulario = ContactoForm(data=request.POST)
+    #     if formulario.is_valid():
+    #         formulario.save()
+    #         data["mensaje"] = "Contacto guardado"
+    #     else:
+    #         data['contacto_formulario'] = formulario
+
+    # return render(request,'contacto.html', data)
+
+
 
 def contacto(request):
-    data = {
-        'contacto_formulario': ContactoForm()
-    }
-
     if request.method == 'POST':
-        formulario = ContactoForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "Contacto guardado"
-        else:
-            data['contacto_formulario'] = formulario
-
-    return render(request,'contacto.html', data)
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            contacto1=Contacto()
+            contacto1.nombre = form.cleaned_data['name']
+            contacto1.email = form.cleaned_data['email']
+            contacto1.asunto = form.cleaned_data['subject']
+            contacto1.mensaje = form.cleaned_data['message']
+            contacto1.save()
+            return redirect('inicio')
+    else:
+        form = ContactoForm()
+    return render(request, 'contacto.html', {'form': form})
 
 
 def paciente(request, nombre):
@@ -96,21 +113,6 @@ def paciente(request, nombre):
     return render(request, "paciente.html", {"context": context})
     # return HttpResponse("hola")
 
-
-# --------------------------------------------------------------------
-
-# def my_view(request): #para que se visualicen esos datos en la parte de turnos
-#     user = request.user
-#     profile = profile.objects.get(user=user)
-#     context = {
-#         'username': user.username,
-#         'dni': profile.dni,
-#     }
-#     return render(request, 'turnos.html', context)
-
-# def especialidad(request): #ESTO E PARA QUE SE VISUALICE LA ESPECIALIDAD
-#     especialidad = Especialidad.objects.all()
-#     return render(request, 'turnos.html', {'especialidad': especialidad})
 
 
 def turnos(request):
@@ -207,7 +209,7 @@ class TurnosCreate(CreateView):
     model = Turno
     form_class=TurnoForm 
     success_url = reverse_lazy('turnos_index_view')
-   # fields = ['especialidad', 'paciente', 'fecha', 'hora', 'medico']
+#    fields = ['especialidad', 'paciente', 'fecha', 'hora', 'medico']
     template_name = 'turno/nuevoturno.html'
 
 class TurnosListView(ListView):
