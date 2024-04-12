@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'URL_DISTPACHER.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
         'NAME': config('DATABASE_NAME'),
